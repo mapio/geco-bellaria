@@ -43,7 +43,7 @@ def update_tables():
 
     table1_container.clear()
     with table1_container:
-        ui.table.from_pandas(df1, sortable=True).classes('w-full')
+        ui.table.from_pandas(df1).classes('w-full')
 
     table2_container.clear()
     with table2_container:
