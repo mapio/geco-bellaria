@@ -11,10 +11,11 @@ def fetch_tables():
     risultati = pd.read_html(URL)[0]
     rn = risultati.fillna('')
     
-    df = rn[rn.iloc[:,5].str.contains('Geco')].iloc[:, [5,8,10]]
-    df.columns = ['Squadra', 'Piazzamento', 'Punti']
-    df['Squadra'] = df['Squadra'].str.replace(' (Mi) -', '', regex=False)
-    df = df.sort_values('Piazzamento')
+    df = rn[rn.iloc[:,5].str.contains('Geco')].iloc[:, [5,8, 10, 14, 16, 22, 24]]
+    df.columns = ['Squadra', 'Piazzamento', 'Punti', 'Set Vinti', 'Set Persi', 'Punti fatti', 'Punti subiti']
+    df.Squadra = df.Squadra.str.replace(' (Mi) -', '')
+    df.sort_values('Squadra')
+    df = df.set_index('Squadra').sort_values('Piazzamento')
 
     sel = rn[
         (rn.iloc[:,4].str.contains('Geco') | rn.iloc[:,6].str.contains('Geco')) & (rn.iloc[:,5] == '-')
